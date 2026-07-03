@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Taxi Reso",
+  title: {
+    default: "Taxi Reso",
+    template: "%s | Taxi Reso"
+  },
   description: "Experience the finest dining at Taxi Reso, Tangail's premier restaurant. Enjoy authentic cuisine, craft cocktails, and a vibrant atmosphere. Order online for delivery, takeaway, or reserve your table now.",
 };
 
