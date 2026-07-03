@@ -1,5 +1,6 @@
 // components/FoodCard.jsx
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FoodCard = async({ food }) => {
   const { id, title, foodImg, price, category } = food;
@@ -58,7 +59,7 @@ const FoodCard = async({ food }) => {
           </button>
 
           {/* View Details */}
-          <button 
+          <Link href={`/foods/${id}`}><button 
             className="flex-1 flex items-center justify-center py-2 px-3 border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 rounded-md transition-colors duration-200"
             aria-label="View details"
           >
@@ -82,7 +83,7 @@ const FoodCard = async({ food }) => {
                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" 
               />
             </svg>
-          </button>
+          </button></Link>
 
           {/* Wishlist */}
           <button 
