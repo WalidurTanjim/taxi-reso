@@ -1,3 +1,4 @@
+import FoodCard from '@/components/FoodCard/FoodCard';
 import SearchFoods from '@/components/SearchFoods/SearchFoods'
 import React from 'react'
 
@@ -15,7 +16,7 @@ const getFoods = async(search) => {
 const FoodsPage = async({ searchParams }) => {
      const { search = '' } = await searchParams;
      const foods = await getFoods(search);
-     console.log(foods)
+     // console.log(foods)
 
      return (
           <div className='foods w-full px-2 md:px-5 lg:px-8 py-10'>
@@ -27,13 +28,9 @@ const FoodsPage = async({ searchParams }) => {
                </div>
 
                {/* show all foods as card */}
-               <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 mg:grid-cols-4 xl:grid-cols-5'>
+               <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5'>
                     {
-                         foods.map(food => {
-                              return (
-                                   <h1 className='px-5 py-2 rounded-md border'>{food.title}</h1>
-                              )
-                         })
+                         foods.map(food => <FoodCard key={food.id} food={food} />)
                     }
                </div>
           </div>
