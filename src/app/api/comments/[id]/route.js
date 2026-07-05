@@ -1,4 +1,5 @@
 import connect from "@/app/lib/dbConnect";
+import { ObjectId } from "mongodb";
 
 export async function GET(request, { params }) {
      const { id } = await params;
@@ -19,3 +20,13 @@ export async function GET(request, { params }) {
      })
 }
 
+export async function DELETE(request, { params }) {
+     const { id } = await params;
+     
+     const query = { _id: new ObjectId(id) };
+     await connect('comments').deleteOne(query);
+     return Response.json({
+          status: 204,
+          message: "This comment is delete successfully"
+     })
+}
