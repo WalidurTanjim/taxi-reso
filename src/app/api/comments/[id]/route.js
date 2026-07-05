@@ -1,3 +1,4 @@
+import dbCollectons from "@/app/lib/collectioins";
 import connect from "@/app/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
@@ -12,7 +13,9 @@ export async function GET(request, { params }) {
           })
      }
 
-     const result = await connect('comments').findOne();
+     const query = { _id: new ObjectId(id) };
+
+     const result = await connect(dbCollectons.COMMENTS).findOne(query);
      return Response.json({
           status: 200,
           message: "Comments retrived successfully",
@@ -24,7 +27,7 @@ export async function DELETE(request, { params }) {
      const { id } = await params;
      
      const query = { _id: new ObjectId(id) };
-     await connect('comments').deleteOne(query);
+     await connect(dbCollectons.COMMENTS).deleteOne(query);
      return Response.json({
           status: 204,
           message: "This comment is delete successfully"
