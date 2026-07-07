@@ -1,4 +1,5 @@
 import CommentCard from '@/components/CommentCard/CommentCard';
+import Link from 'next/link';
 import React from 'react'
 
 const getComments = async() => {
@@ -20,7 +21,11 @@ const CommentsPage = async() => {
 
      return (
           <div className='w-full px-2 md:px-5 lg:px-8 py-10'>
-               <h1 className='text-2xl text-slate-700 text-center font-medium'>All Comments: <span className='font-medium text-orange-500'>{comments.length > 0 ? comments.length : 0}</span></h1>
+               <div className='flex items-center justify-between'>
+                    <h1 className='text-2xl text-slate-700 text-center font-medium'>All Comments: <span className='font-medium text-orange-500'>{comments.length > 0 ? comments.length : 0}</span></h1>
+
+                    <Link href={'/comments/add'}><p className='px-5 py-2 border border-gray-300 rounded-md hover:bg-gray-100 active:bg-transparent'>Add Comments</p></Link>
+               </div>
 
                <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 mg:grid-cols-4 xl:grid-cols-5 my-10'>
                     {

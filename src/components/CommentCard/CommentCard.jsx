@@ -28,7 +28,8 @@ export default function CommentCard({ comment }) {
           </p>
           
           <div className="mt-2 flex items-center gap-4 text-sm text-gray-500">
-            <span>{formatDate(comment.date)}</span>
+            {/* <span>{formatDate(comment.date)}</span> */}
+            <span>{comment.date}</span>
           </div>
           
           {/* Action Buttons */}

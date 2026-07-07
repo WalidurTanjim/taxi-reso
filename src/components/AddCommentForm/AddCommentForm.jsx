@@ -1,10 +1,13 @@
 "use client"
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 const AddCommentForm = () => {
      const [comment, setComment] = useState('');
      const [isSubmitting, setIsSubmitting] = useState(false);
-     console.log(comment)
+     // console.log(comment)
+
+     const router = useRouter()
 
      const handleAddComment = async(e) => {
           e.preventDefault();
@@ -21,10 +24,16 @@ const AddCommentForm = () => {
                     headers: {
                          'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ comment: comment.trim() })
+                    body: JSON.stringify({ comment: comment.trim(), date: new Date() })
                })
 
-               console.log(res);
+               const data = await res.json();
+               // console.log("Post comment client:", data);
+               if(data.status === 200){
+                    setIsSubmitting(false);
+                    alert(data.message)
+                    router.push('/comments')
+               }
           }catch(err) {
                console.error(err);
                return 'Try again.'
