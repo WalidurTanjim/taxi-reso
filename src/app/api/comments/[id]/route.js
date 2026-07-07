@@ -1,6 +1,7 @@
 import dbCollectons from "@/app/lib/collectioins";
 import connect from "@/app/lib/dbConnect";
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request, { params }) {
      const { id } = await params;
@@ -25,11 +26,29 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
      const { id } = await params;
+
+     if(!id || id.length !== 24) {
+          return Response.json({
+               status: 400,
+               message: "Failed to retrive",
+               data: null
+          })
+     }
      
-     const query = { _id: new ObjectId(id) };
-     await connect(dbCollectons.COMMENTS).deleteOne(query);
-     return Response.json({
-          status: 204,
-          message: "This comment is delete successfully"
-     })
+     try{
+          const query = { _id: new ObjectId(id) };
+          await connect(dbCollectons.COMMENTS).deleteOne(query);
+          revalidatePath('/comments')
+          return Response.json({
+               status: 204,
+               message: "This comment is delete successfully"
+          })
+     }catch(err) {
+          console.error(err)
+          return Response.json({
+               status: 500,
+               message: "Failed to delete comment",
+               data: null
+          })
+     }
 }
