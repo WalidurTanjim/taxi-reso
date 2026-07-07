@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CommentDeleteButton from "../Buttons/CommentDeleteButton/CommentDeleteButton";
 
 // src/components/CommentCard.jsx
@@ -55,6 +56,16 @@ export default function CommentCard({ comment }) {
             <div className="w-px h-6 bg-gray-200 mx-1"></div>
             
             <CommentDeleteButton id={comment._id} />
+            
+            {/* Update Comment Button - Added */}
+            <Link href={`/comments/update/${comment._id}`}><button
+              className="p-2 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+              aria-label="Update"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button></Link>
           </div>
         </div>
       </div>
